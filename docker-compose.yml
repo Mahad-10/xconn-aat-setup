@@ -10,6 +10,11 @@ services:
     volumes:
       - ./crossbar/.crossbar/:/node/.crossbar/
       - ./crossbar/backend.py:/node/backend.py
+    healthcheck:
+      test: [ "CMD", "wick", "join", "--non-interactive" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
   xconn:
     container_name: xconn
